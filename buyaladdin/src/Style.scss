@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+$font-faimily: "Poppins", sans-serif;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li {
+  list-style: none;
+}
+body {
+  width: 100%;
+  font-family: $font-faimily;
+  #root {
+    width: 100%;
+    @include flex();
+  }
+}
+.App {
+  width: 100%;
+  max-width: 700px;
+}
+.home {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  overflow: hidden;
+  background: url(../public/assets/image/home.jpg) center center no-repeat;
+  background-size: auto 100%;
+  position: relative;
+  .home-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .home-icon {
+    width: 40px;
+    height: 30px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    @include flex();
+    background-color: darkgrey;
+    border-radius: 15px;
+    cursor: pointer;
+    img {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+    }
+  }
+  .home-inner {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .home-content {
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 20px;
+      pointer-events: none;
+      .content-logo {
+        width: 120px;
+        @include flex();
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+      h3 {
+        width: 100%;
+        font-size: 30px;
+        color: #fff;
+        line-height: 1.2;
+        font-weight: 800;
+        margin: 10px 0 20px;
+      }
+      p {
+        font-size: 13px;
+        color: #fff;
+      }
+    }
+    .home-bottom {
+      width: 100%;
+      background-color: white;
+      padding: 30px;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      span {
+        display: inline-block;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        background-color: black;
+        @include flex();
+        border-radius: 10px;
+        padding: 15px 0;
+        cursor: pointer;
+        svg {
+          width: 40px;
+          height: 40px;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+}
+
+.list {
+  width: 100%;
+  .list-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 5px 0;
+    svg {
+      width: 50px;
+      height: 50px;
+      stroke-width: 1px;
+      cursor: pointer;
+    }
+    .nav-logo {
+      width: 100px;
+      @include flex();
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .list-title {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 15px;
+    pointer-events: none;
+    strong {
+      font-size: 30px;
+      display: block;
+      padding: 10px 0;
+      font-weight: 900;
+    }
+    span {
+      display: block;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+  .country {
+    width: 100%;
+    padding: 50px 15px;
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-flow: row wrap;
+      padding: 0;
+      li {
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+        width: 45%;
+        max-width: 190px;
+        aspect-ratio: 1/1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        img {
+          width: 60%;
+          object-fit: cover;
+        }
+        span {
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+        }
+      }
+    }
+  }
+}
+
+//Modal
+
+.modal-dialog {
+  width: 100%;
+  height: 100vh;
+  @include flex();
+  .modal-content {
+    width: 80%;
+    padding: 0 0 30px;
+    border: none;
+    border-radius: 20px;
+  }
+  .comming-soon {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      transform: rotate(45deg) scale(2);
+      cursor: pointer;
+      stroke-width: 1px;
+      stop-opacity: 0.5;
+    }
+    .loader {
+      width: 80px;
+      height: 80px;
+      margin: 80px 0;
+    }
+    strong {
+      font-size: 28px;
+      font-weight: 800;
+      pointer-events: none;
+    }
+    span {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+  }
+}
