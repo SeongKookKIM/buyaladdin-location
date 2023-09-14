@@ -398,6 +398,18 @@ body {
       flex-direction: column;
       padding: 0;
       border-top: 1px solid #b4b4b3;
+      .no-shop {
+        width: 100%;
+        margin-top: 50px;
+        pointer-events: none;
+        span {
+          display: block;
+          font-size: 20px;
+          font-family: $font-faimily;
+          font-weight: 800;
+          text-align: center;
+        }
+      }
       li {
         width: 100%;
         display: flex;

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LuChevronLeft, LuChevronDown, LuPlus } from "react-icons/lu";
+import Region from "../data/Region";
 
 function Detial() {
   const [flag, setFlag] = useState("");
   const [region, setRegion] = useState(false);
+  const [selectState, setSeletState] = useState("도시를 선택해주세요.");
+  const [countryState, setCountryState] = useState(null);
+  const [shopList, setShopList] = useState(null);
+  const [allMap, setAllMap] = useState(null);
 
   const location = useLocation();
 
@@ -12,7 +17,49 @@ function Detial() {
 
   useEffect(() => {
     setFlag(location.state);
+
+    const allMaps = Region.reduce((accumulator, country) => {
+      return accumulator.concat(
+        country.list.reduce((stateAccumulator, state) => {
+          return stateAccumulator.concat(state.map);
+        }, [])
+      );
+    }, []);
+
+    setAllMap(allMaps);
   }, []);
+
+  useEffect(() => {
+    const selectedCountry = flag.name;
+
+    const selectedCountryObj = Region.find(
+      (country) => country.name === selectedCountry
+    );
+
+    const statesArray = selectedCountryObj
+      ? selectedCountryObj.list.map((item) => item.state)
+      : [];
+
+    setCountryState(statesArray);
+  }, [flag]);
+
+  function handlerShopList() {
+    const match = [];
+
+    for (const region of Region) {
+      for (const item of region.list) {
+        if (item.state === selectState) {
+          match.push(...item.map);
+        }
+      }
+    }
+
+    setShopList(match);
+  }
+
+  // useEffect(() => {
+  //   console.log(shopList);
+  // }, [shopList]);
 
   return (
     <div className="detail">
@@ -42,7 +89,7 @@ function Detial() {
             setRegion(!region);
           }}
         >
-          <p>도시를 선택해주세요.</p>
+          <p>{selectState}</p>
           <LuChevronDown />
         </div>
         {region && (
@@ -53,47 +100,31 @@ function Detial() {
             }}
           >
             <ul>
-              <li>
-                <p>서울</p>
-              </li>
-              <li>
-                <p>인천</p>
-              </li>
-              <li>
-                <p>경기</p>
-              </li>
-              <li>
-                <p>대전</p>
-              </li>
-              <li>
-                <p>충청남도</p>
-              </li>
-              <li>
-                <p>충청북도</p>
-              </li>
-              <li>
-                <p>강원도</p>
-              </li>
-              <li>
-                <p>경상북도</p>
-              </li>
-              <li>
-                <p>경상남도</p>
-              </li>
-              <li>
-                <p>전라남도</p>
-              </li>
-              <li>
-                <p>전라북도</p>
-              </li>
-              <li>
-                <p>제주도</p>
-              </li>
+              {countryState &&
+                countryState.map((state, idx) => {
+                  return (
+                    <li
+                      key={idx}
+                      onClick={() => {
+                        setSeletState(state);
+                      }}
+                    >
+                      <p>{state}</p>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         )}
 
-        <button type="button">매장찾기</button>
+        <button
+          type="button"
+          onClick={() => {
+            handlerShopList();
+          }}
+        >
+          매장찾기
+        </button>
       </div>
 
       <div className="shop-list">
@@ -102,86 +133,78 @@ function Detial() {
           <LuPlus />
         </div>
         <ul>
-          <li>
-            <div className="shop-img">
-              <img src="/assets/image/tnc01.jpg" alt="shop-img" />
-            </div>
-            <div className="shop-info">
-              <strong>태인씨1</strong>
-              <p>
-                서울특별시 강남구 봉은사로 514
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-              <p>
-                010-1234-1234
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-            </div>
-          </li>
-          <li>
-            <div className="shop-img">
-              <img src="/assets/image/tnc01.jpg" alt="shop-img" />
-            </div>
-            <div className="shop-info">
-              <strong>태인씨1</strong>
-              <p>
-                서울특별시 강남구 봉은사로 514
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-              <p>
-                010-1234-1234
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-            </div>
-          </li>
-          <li>
-            <div className="shop-img">
-              <img src="/assets/image/tnc01.jpg" alt="shop-img" />
-            </div>
-            <div className="shop-info">
-              <strong>태인씨1</strong>
-              <p>
-                서울특별시 강남구 봉은사로 514
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-              <p>
-                010-1234-1234
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-            </div>
-          </li>
-          <li>
-            <div className="shop-img">
-              <img src="/assets/image/tnc01.jpg" alt="shop-img" />
-            </div>
-            <div className="shop-info">
-              <strong>태인씨1</strong>
-              <p>
-                서울특별시 강남구 봉은사로 514
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-              <p>
-                010-1234-1234
-                <span>
-                  <img src="/assets/image/Copy.png" alt="copy" />
-                </span>
-              </p>
-            </div>
-          </li>
+          {shopList ? (
+            <>
+              {shopList.length === 0 ? (
+                <div className="no-shop">
+                  <span>현재 준비중입니다.</span>
+                </div>
+              ) : (
+                <>
+                  {" "}
+                  <>
+                    {shopList.map((it, i) => {
+                      return (
+                        <li key={i}>
+                          <div className="shop-img">
+                            <img src={it.src} alt="shop-img" />
+                          </div>
+                          <div className="shop-info">
+                            <strong>{it.shop}</strong>
+                            <p>
+                              {it.adress}
+                              <span>
+                                <img src="/assets/image/Copy.png" alt="copy" />
+                              </span>
+                            </p>
+                            <p>
+                              {it.call}
+                              <span>
+                                <img src="/assets/image/Copy.png" alt="copy" />
+                              </span>
+                            </p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </>{" "}
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {allMap && allMap.length > 0 ? (
+                <>
+                  {allMap.map((map, idx) => {
+                    return (
+                      <li key={idx}>
+                        <div className="shop-img">
+                          <img src={map.src} alt="shop-img" />
+                        </div>
+                        <div className="shop-info">
+                          <strong>{map.shop}</strong>
+                          <p>
+                            {map.adress}
+                            <span>
+                              <img src="/assets/image/Copy.png" alt="copy" />
+                            </span>
+                          </p>
+                          <p>
+                            {map.call}
+                            <span>
+                              <img src="/assets/image/Copy.png" alt="copy" />
+                            </span>
+                          </p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </>
+              ) : (
+                ""
+              )}
+            </>
+          )}
         </ul>
       </div>
     </div>
