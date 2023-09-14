@@ -57,9 +57,37 @@ function Detial() {
     setShopList(match);
   }
 
-  // useEffect(() => {
-  //   console.log(shopList);
-  // }, [shopList]);
+  const handleAdress = (adress) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = adress;
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+      alert("클립보드에 주소가 복사되었습니다.");
+    } catch (e) {
+      alert("주소복사에 실패하였습니다");
+    }
+
+    document.body.removeChild(textarea);
+  };
+
+  const handleCall = (call) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = call;
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+      alert("클립보드에 전화번호가 복사되었습니다.");
+    } catch (e) {
+      alert("전화번호 복사에 실패하였습니다");
+    }
+
+    document.body.removeChild(textarea);
+  };
 
   return (
     <div className="detail">
@@ -153,13 +181,21 @@ function Detial() {
                             <strong>{it.shop}</strong>
                             <p>
                               {it.adress}
-                              <span>
+                              <span
+                                onClick={() => {
+                                  handleAdress(it.adress);
+                                }}
+                              >
                                 <img src="/assets/image/Copy.png" alt="copy" />
                               </span>
                             </p>
                             <p>
                               {it.call}
-                              <span>
+                              <span
+                                onClick={() => {
+                                  handleCall(it.call);
+                                }}
+                              >
                                 <img src="/assets/image/Copy.png" alt="copy" />
                               </span>
                             </p>
@@ -185,13 +221,21 @@ function Detial() {
                           <strong>{map.shop}</strong>
                           <p>
                             {map.adress}
-                            <span>
+                            <span
+                              onClick={() => {
+                                handleAdress(map.adress);
+                              }}
+                            >
                               <img src="/assets/image/Copy.png" alt="copy" />
                             </span>
                           </p>
                           <p>
                             {map.call}
-                            <span>
+                            <span
+                              onClick={() => {
+                                handleCall(map.call);
+                              }}
+                            >
                               <img src="/assets/image/Copy.png" alt="copy" />
                             </span>
                           </p>
