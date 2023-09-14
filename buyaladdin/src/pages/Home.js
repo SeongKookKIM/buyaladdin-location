@@ -7,14 +7,7 @@ function Home() {
   return (
     <div className="home">
       <div className="home-bg"></div>
-      <div
-        className="home-icon"
-        onClick={() => {
-          window.location.href = "https://buyaladdin.com/";
-        }}
-      >
-        <img src="/assets/image/Home-btn.png" />
-      </div>
+
       <div className="home-inner">
         <div className="home-content">
           <div className="content-logo">

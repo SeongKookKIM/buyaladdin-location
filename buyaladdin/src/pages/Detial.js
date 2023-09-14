@@ -9,7 +9,6 @@ function Detial() {
   const [selectState, setSeletState] = useState("도시를 선택해주세요.");
   const [countryState, setCountryState] = useState(null);
   const [shopList, setShopList] = useState(null);
-  const [allMap, setAllMap] = useState(null);
 
   const location = useLocation();
 
@@ -17,17 +16,7 @@ function Detial() {
 
   useEffect(() => {
     setFlag(location.state);
-
-    const allMaps = Region.reduce((accumulator, country) => {
-      return accumulator.concat(
-        country.list.reduce((stateAccumulator, state) => {
-          return stateAccumulator.concat(state.map);
-        }, [])
-      );
-    }, []);
-
-    setAllMap(allMaps);
-  }, []);
+  }, [location.state]);
 
   useEffect(() => {
     const selectedCountry = flag.name;
@@ -43,19 +32,19 @@ function Detial() {
     setCountryState(statesArray);
   }, [flag]);
 
-  function handlerShopList() {
-    const match = [];
-
-    for (const region of Region) {
-      for (const item of region.list) {
-        if (item.state === selectState) {
-          match.push(...item.map);
+  useEffect(() => {
+    if (selectState !== "도시를 선택해주세요.") {
+      const match = [];
+      for (const region of Region) {
+        for (const item of region.list) {
+          if (item.state === selectState) {
+            match.push(...item.map);
+          }
         }
       }
+      setShopList(match);
     }
-
-    setShopList(match);
-  }
+  }, [selectState]);
 
   const handleAdress = (adress) => {
     const textarea = document.createElement("textarea");
@@ -145,14 +134,14 @@ function Detial() {
           </div>
         )}
 
-        <button
+        {/* <button
           type="button"
           onClick={() => {
             handlerShopList();
           }}
         >
           매장찾기
-        </button>
+        </button> */}
       </div>
 
       <div className="shop-list">
@@ -169,71 +158,29 @@ function Detial() {
                 </div>
               ) : (
                 <>
-                  {" "}
-                  <>
-                    {shopList.map((it, i) => {
-                      return (
-                        <li key={i}>
-                          <div className="shop-img">
-                            <img src={it.src} alt="shop-img" />
-                          </div>
-                          <div className="shop-info">
-                            <strong>{it.shop}</strong>
-                            <p>
-                              {it.adress}
-                              <span
-                                onClick={() => {
-                                  handleAdress(it.adress);
-                                }}
-                              >
-                                <img src="/assets/image/Copy.png" alt="copy" />
-                              </span>
-                            </p>
-                            <p>
-                              {it.call}
-                              <span
-                                onClick={() => {
-                                  handleCall(it.call);
-                                }}
-                              >
-                                <img src="/assets/image/Copy.png" alt="copy" />
-                              </span>
-                            </p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </>{" "}
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              {allMap && allMap.length > 0 ? (
-                <>
-                  {allMap.map((map, idx) => {
+                  {shopList.map((it, i) => {
                     return (
-                      <li key={idx}>
+                      <li key={i}>
                         <div className="shop-img">
-                          <img src={map.src} alt="shop-img" />
+                          <img src={it.src} alt="shop-img" />
                         </div>
                         <div className="shop-info">
-                          <strong>{map.shop}</strong>
+                          <strong>{it.shop}</strong>
                           <p>
-                            {map.adress}
+                            {it.adress}
                             <span
                               onClick={() => {
-                                handleAdress(map.adress);
+                                handleAdress(it.adress);
                               }}
                             >
                               <img src="/assets/image/Copy.png" alt="copy" />
                             </span>
                           </p>
                           <p>
-                            {map.call}
+                            {it.call}
                             <span
                               onClick={() => {
-                                handleCall(map.call);
+                                handleCall(it.call);
                               }}
                             >
                               <img src="/assets/image/Copy.png" alt="copy" />
@@ -244,10 +191,10 @@ function Detial() {
                     );
                   })}
                 </>
-              ) : (
-                ""
               )}
             </>
+          ) : (
+            ""
           )}
         </ul>
       </div>
