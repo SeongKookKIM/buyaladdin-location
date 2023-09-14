@@ -13,8 +13,17 @@ $font-faimily: "Poppins", sans-serif;
   padding: 0;
   box-sizing: border-box;
 }
+ul {
+  padding: 0;
+  margin: 0;
+}
 li {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+html {
+  font-family: $font-faimily;
 }
 body {
   width: 100%;
@@ -239,6 +248,207 @@ body {
       font-weight: 600;
       color: rgba(0, 0, 0, 0.5);
       pointer-events: none;
+    }
+  }
+}
+
+// Detail
+.detail {
+  width: 100%;
+  .detail-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 5px 0;
+    svg {
+      width: 50px;
+      height: 50px;
+      stroke-width: 1px;
+      cursor: pointer;
+    }
+    .nav-logo {
+      width: 50px;
+      @include flex();
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .detail-title {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 15px;
+    pointer-events: none;
+    strong {
+      font-size: 30px;
+      display: block;
+      padding: 10px 0;
+      font-weight: 900;
+    }
+    span {
+      display: block;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  .find-state {
+    width: 100%;
+    padding: 0 15px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    .select {
+      width: 100%;
+      border: 2px solid #b4b4b3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 6px;
+      cursor: pointer;
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+        font-family: $font-faimily;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .select-group {
+      width: calc(100% - 30px);
+      border: 2px solid #333;
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      z-index: 100;
+      ul {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        li {
+          margin: 0;
+          padding: 0;
+          padding: 0 6px;
+
+          cursor: pointer;
+          &:hover {
+            background-color: #333;
+            color: #fff;
+          }
+          p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+            font-family: $font-faimily;
+            padding: 5px 0;
+          }
+        }
+      }
+    }
+    button {
+      width: 100%;
+      font-size: 18px;
+      font-weight: 700;
+      background-color: black;
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 10px 0;
+      border-radius: 10px;
+    }
+  }
+  .shop-list {
+    width: 100%;
+    padding: 0 15px;
+    margin: 100px 0 50px;
+    .shop-title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      padding-bottom: 10px;
+      h5 {
+        font-size: 16px;
+        font-weight: 800;
+        font-family: $font-faimily;
+        pointer-events: none;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 3px;
+      }
+    }
+    ul {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      border-top: 1px solid #b4b4b3;
+      li {
+        width: 100%;
+        display: flex;
+        padding: 30px 0;
+        border-bottom: 1px solid #b4b4b3;
+        .shop-img {
+          width: 50%;
+          @include flex();
+          justify-content: flex-start;
+          img {
+            width: 90%;
+            object-fit: cover;
+            border-radius: 10px;
+          }
+        }
+        .shop-info {
+          width: 50%;
+          @include flex();
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          strong {
+            font-size: 20px;
+            font-family: $font-faimily;
+            font-weight: 700;
+            pointer-events: none;
+          }
+          p {
+            font-size: 13px;
+            font-weight: 600;
+            font-family: $font-faimily;
+            color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            padding: 0;
+            margin: 0;
+            span {
+              margin-left: 3px;
+              position: absolute;
+              cursor: pointer;
+              img {
+                display: inline-block;
+                width: 17px;
+                height: 17px;
+              }
+            }
+          }
+        }
+        &:last-child {
+          border: none;
+        }
+      }
     }
   }
 }
