@@ -30,7 +30,7 @@ function List() {
           }}
         />
         <div className="nav-logo">
-          <img src="/assets/image/Logo.png" />
+          <img src="/assets/image/logo.png" />
         </div>
       </div>
 
