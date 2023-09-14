@@ -92,7 +92,7 @@ function Detial() {
       </div>
 
       <div className="detail-title">
-        <strong>City Selectionv</strong>
+        <strong>City Selection</strong>
         <span>
           Please select the city <br />
           you want to find.
