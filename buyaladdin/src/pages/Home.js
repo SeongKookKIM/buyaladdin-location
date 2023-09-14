@@ -18,7 +18,7 @@ function Home() {
       <div className="home-inner">
         <div className="home-content">
           <div className="content-logo">
-            <img src="/assets/image/Logo.png" />
+            <img src="/assets/image/logo.png" alt="Logo" />
           </div>
           <h3>
             Find a luxury <br />
